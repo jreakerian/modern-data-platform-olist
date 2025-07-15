@@ -1,5 +1,7 @@
 # modern-data-platform-olist
 
+![Architecture Diagram](medalion_architecture.svg)
+
 An end-to-end data engineering project demonstrating a modern, production-grade ELT pipeline for the Olist e-commerce dataset. This repository showcases the implementation of a Medallion Lakehouse architecture to ingest raw data, process it through quality-gated layers, and serve it in an analytics-ready format for business intelligence.   
 
 The primary goal is to provide a complete blueprint for best practices in data modeling, transformation, quality testing, and orchestration using a contemporary data stack.   

@@ -1,0 +1,134 @@
+[0m20:00:13.309294 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000193EDB920C0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000193F2088A40>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000193F0A5E180>]}
+
+
+============================== 20:00:13.314947 | 73e605ae-7e60-4f76-9de8-47c08923fff8 ==============================
+[0m20:00:13.314947 [info ] [MainThread]: Running with dbt=1.10.4
+[0m20:00:13.315947 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'profiles_dir': 'C:\\Users\\EbotK\\.dbt', 'log_path': 'logs', 'version_check': 'True', 'debug': 'False', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt init dbt_project', 'introspect': 'True', 'log_format': 'default', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m20:00:13.337295 [debug] [MainThread]: Starter project path: C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt-env\Lib\site-packages\dbt\include\starter_project
+[0m20:00:13.350074 [info ] [MainThread]: 
+Your new dbt project "dbt_project" was created!
+
+For more information on how to configure the profiles.yml file,
+please consult the dbt documentation here:
+
+  https://docs.getdbt.com/docs/configure-your-profile
+
+One more thing:
+
+Need help? Don't hesitate to reach out to us via GitHub issues or on Slack:
+
+  https://community.getdbt.com/
+
+Happy modeling!
+
+[0m20:00:13.351080 [info ] [MainThread]: Setting up your profile.
+[0m20:17:37.713760 [info ] [MainThread]: Profile dbt_project written to C:\Users\EbotK\.dbt\profiles.yml using target's profile_template.yml and your supplied values. Run 'dbt debug' to validate the connection.
+[0m20:17:37.715754 [debug] [MainThread]: Command `dbt init` succeeded at 20:17:37.715754 after 1044.56 seconds
+[0m20:17:37.715754 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000194014E5010>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000193FF84B650>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000193FFE18BC0>]}
+[0m20:17:37.716748 [debug] [MainThread]: Flushing usage events
+[0m20:17:43.067308 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:18:05.128873 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019920BFCDD0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001991EBA9BE0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x00000199207544D0>]}
+
+
+============================== 20:18:05.133044 | a0f55155-0970-4cc6-8429-14a21c44fd0b ==============================
+[0m20:18:05.133044 [info ] [MainThread]: Running with dbt=1.10.4
+[0m20:18:05.134045 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'write_json': 'True', 'log_cache_events': 'False', 'partial_parse': 'True', 'cache_selected_only': 'False', 'profiles_dir': 'C:\\Users\\EbotK\\.dbt', 'version_check': 'True', 'debug': 'False', 'log_path': 'logs', 'fail_fast': 'False', 'warn_error': 'None', 'use_colors': 'True', 'use_experimental_parser': 'False', 'no_print': 'None', 'quiet': 'False', 'empty': 'None', 'log_format': 'default', 'introspect': 'True', 'invocation_command': 'dbt debug', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m20:18:05.151421 [info ] [MainThread]: dbt version: 1.10.4
+[0m20:18:05.152424 [info ] [MainThread]: python version: 3.12.10
+[0m20:18:05.152424 [info ] [MainThread]: python path: C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt-env\Scripts\python.exe
+[0m20:18:05.153423 [info ] [MainThread]: os info: Windows-11-10.0.26100-SP0
+[0m20:18:05.857412 [info ] [MainThread]: Using profiles dir at C:\Users\EbotK\.dbt
+[0m20:18:05.857412 [info ] [MainThread]: Using profiles.yml file at C:\Users\EbotK\.dbt\profiles.yml
+[0m20:18:05.858413 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt_project.yml
+[0m20:18:05.858413 [error] [MainThread]: Encountered an error:
+Internal Error
+  Profile should not be None if loading profile completed
+[0m20:18:05.860006 [debug] [MainThread]: Command `dbt debug` failed at 20:18:05.860006 after 0.89 seconds
+[0m20:18:05.861117 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001991CCE0830>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000019940E5D100>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000001994279E540>]}
+[0m20:18:05.861117 [debug] [MainThread]: Flushing usage events
+[0m20:18:11.010492 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:25:41.982687 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020570E61160>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002057079E870>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020570289340>]}
+
+
+============================== 20:25:41.987701 | 20a6ad03-298b-4a0e-b937-5269898812fb ==============================
+[0m20:25:41.987701 [info ] [MainThread]: Running with dbt=1.10.4
+[0m20:25:41.988713 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'debug': 'False', 'profiles_dir': 'C:\\Users\\EbotK\\.dbt', 'log_path': 'logs', 'fail_fast': 'False', 'version_check': 'True', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'log_format': 'default', 'invocation_command': 'dbt debug', 'introspect': 'True', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m20:25:42.008839 [info ] [MainThread]: dbt version: 1.10.4
+[0m20:25:42.009839 [info ] [MainThread]: python version: 3.12.10
+[0m20:25:42.011343 [info ] [MainThread]: python path: C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt-env\Scripts\python.exe
+[0m20:25:42.011343 [info ] [MainThread]: os info: Windows-11-10.0.26100-SP0
+[0m20:25:42.820676 [info ] [MainThread]: Using profiles dir at C:\Users\EbotK\.dbt
+[0m20:25:42.821009 [info ] [MainThread]: Using profiles.yml file at C:\Users\EbotK\.dbt\profiles.yml
+[0m20:25:42.822015 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt_project.yml
+[0m20:25:42.822015 [error] [MainThread]: Encountered an error:
+Internal Error
+  Profile should not be None if loading profile completed
+[0m20:25:42.824529 [debug] [MainThread]: Command `dbt debug` failed at 20:25:42.824529 after 1.01 seconds
+[0m20:25:42.824529 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002057020A8A0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x0000020570695070>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002051246C800>]}
+[0m20:25:42.825530 [debug] [MainThread]: Flushing usage events
+[0m20:25:43.089102 [debug] [MainThread]: An error was encountered while trying to flush usage events
+[0m20:28:49.053507 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'start', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A185605AF0>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A185606B70>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A185606E70>]}
+
+
+============================== 20:28:49.063728 | fd154b67-6be6-4730-ae0f-03cfbefc598a ==============================
+[0m20:28:49.063728 [info ] [MainThread]: Running with dbt=1.10.4
+[0m20:28:49.064728 [debug] [MainThread]: running dbt with arguments {'printer_width': '80', 'indirect_selection': 'eager', 'log_cache_events': 'False', 'write_json': 'True', 'partial_parse': 'True', 'cache_selected_only': 'False', 'warn_error': 'None', 'fail_fast': 'False', 'debug': 'False', 'log_path': 'logs', 'version_check': 'True', 'profiles_dir': 'C:\\Users\\EbotK\\.dbt', 'use_colors': 'True', 'use_experimental_parser': 'False', 'empty': 'None', 'quiet': 'False', 'no_print': 'None', 'warn_error_options': 'WarnErrorOptionsV2(error=[], warn=[], silence=[])', 'invocation_command': 'dbt debug', 'introspect': 'True', 'log_format': 'default', 'target_path': 'None', 'static_parser': 'True', 'send_anonymous_usage_stats': 'True'}
+[0m20:28:49.083807 [info ] [MainThread]: dbt version: 1.10.4
+[0m20:28:49.084809 [info ] [MainThread]: python version: 3.12.10
+[0m20:28:49.084809 [info ] [MainThread]: python path: C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt-env\Scripts\python.exe
+[0m20:28:49.085808 [info ] [MainThread]: os info: Windows-11-10.0.26100-SP0
+[0m20:28:49.752720 [info ] [MainThread]: Using profiles dir at C:\Users\EbotK\.dbt
+[0m20:28:49.753724 [info ] [MainThread]: Using profiles.yml file at C:\Users\EbotK\.dbt\profiles.yml
+[0m20:28:49.754722 [info ] [MainThread]: Using dbt_project.yml file at C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt_project.yml
+[0m20:28:49.755409 [info ] [MainThread]: adapter type: snowflake
+[0m20:28:49.756415 [info ] [MainThread]: adapter version: 1.10.0
+[0m20:28:49.757494 [info ] [MainThread]: Configuration:
+[0m20:28:49.757494 [info ] [MainThread]:   profiles.yml file [[32mOK found and valid[0m]
+[0m20:28:49.758494 [info ] [MainThread]:   dbt_project.yml file [[31mERROR not found[0m]
+[0m20:28:49.758494 [info ] [MainThread]: Required dependencies:
+[0m20:28:49.759495 [debug] [MainThread]: Executing "git --help"
+[0m20:28:49.785882 [debug] [MainThread]: STDOUT: "b"usage: git [-v | --version] [-h | --help] [-C <path>] [-c <name>=<value>]\n           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]\n           [-p | --paginate | -P | --no-pager] [--no-replace-objects] [--bare]\n           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]\n           [--config-env=<name>=<envvar>] <command> [<args>]\n\nThese are common Git commands used in various situations:\n\nstart a working area (see also: git help tutorial)\n   clone     Clone a repository into a new directory\n   init      Create an empty Git repository or reinitialize an existing one\n\nwork on the current change (see also: git help everyday)\n   add       Add file contents to the index\n   mv        Move or rename a file, a directory, or a symlink\n   restore   Restore working tree files\n   rm        Remove files from the working tree and from the index\n\nexamine the history and state (see also: git help revisions)\n   bisect    Use binary search to find the commit that introduced a bug\n   diff      Show changes between commits, commit and working tree, etc\n   grep      Print lines matching a pattern\n   log       Show commit logs\n   show      Show various types of objects\n   status    Show the working tree status\n\ngrow, mark and tweak your common history\n   branch    List, create, or delete branches\n   commit    Record changes to the repository\n   merge     Join two or more development histories together\n   rebase    Reapply commits on top of another base tip\n   reset     Reset current HEAD to the specified state\n   switch    Switch branches\n   tag       Create, list, delete or verify a tag object signed with GPG\n\ncollaborate (see also: git help workflows)\n   fetch     Download objects and refs from another repository\n   pull      Fetch from and integrate with another repository or a local branch\n   push      Update remote refs along with associated objects\n\n'git help -a' and 'git help -g' list available subcommands and some\nconcept guides. See 'git help <command>' or 'git help <concept>'\nto read about a specific subcommand or concept.\nSee 'git help git' for an overview of the system.\n""
+[0m20:28:49.785882 [debug] [MainThread]: STDERR: "b''"
+[0m20:28:49.785882 [info ] [MainThread]:  - git [[32mOK found[0m]
+
+[0m20:28:49.787396 [info ] [MainThread]: Connection:
+[0m20:28:49.787396 [info ] [MainThread]:   account: RPBKOZW-HJC48637
+[0m20:28:49.788402 [info ] [MainThread]:   user: CASHALOT
+[0m20:28:49.788402 [info ] [MainThread]:   database: OLIST_LAKEHOUSE
+[0m20:28:49.788402 [info ] [MainThread]:   warehouse: TRANSFORM_WH
+[0m20:28:49.788402 [info ] [MainThread]:   role: ACCOUNTADMIN
+[0m20:28:49.789400 [info ] [MainThread]:   schema: RAW_BRONZE
+[0m20:28:49.789400 [info ] [MainThread]:   authenticator: None
+[0m20:28:49.789400 [info ] [MainThread]:   oauth_client_id: None
+[0m20:28:49.789400 [info ] [MainThread]:   query_tag: None
+[0m20:28:49.790401 [info ] [MainThread]:   client_session_keep_alive: False
+[0m20:28:49.790401 [info ] [MainThread]:   host: None
+[0m20:28:49.790401 [info ] [MainThread]:   port: None
+[0m20:28:49.791401 [info ] [MainThread]:   proxy_host: None
+[0m20:28:49.791401 [info ] [MainThread]:   proxy_port: None
+[0m20:28:49.792401 [info ] [MainThread]:   protocol: None
+[0m20:28:49.792401 [info ] [MainThread]:   connect_retries: 1
+[0m20:28:49.792401 [info ] [MainThread]:   connect_timeout: None
+[0m20:28:49.793402 [info ] [MainThread]:   retry_on_database_errors: False
+[0m20:28:49.793402 [info ] [MainThread]:   retry_all: False
+[0m20:28:49.794400 [info ] [MainThread]:   insecure_mode: False
+[0m20:28:49.794400 [info ] [MainThread]:   reuse_connections: True
+[0m20:28:49.794400 [info ] [MainThread]:   s3_stage_vpce_dns_name: None
+[0m20:28:49.795401 [info ] [MainThread]: Registered adapter: snowflake=1.10.0
+[0m20:28:50.176782 [debug] [MainThread]: Acquiring new snowflake connection 'debug'
+[0m20:28:50.268155 [debug] [MainThread]: Using snowflake connection "debug"
+[0m20:28:50.268659 [debug] [MainThread]: On debug: select 1 as id
+[0m20:28:50.268659 [debug] [MainThread]: Opening a new connection, currently in state init
+[0m20:28:51.851451 [debug] [MainThread]: SQL status: SUCCESS 1 in 1.583 seconds
+[0m20:28:51.852465 [info ] [MainThread]:   Connection test: [[32mOK connection ok[0m]
+
+[0m20:28:51.852465 [info ] [MainThread]: [31m1 check failed:[0m
+[0m20:28:51.853975 [info ] [MainThread]: Project loading failed for the following reason:
+ project path <C:\Users\EbotK\OneDrive\Documents\Projects\modern-data-platform-olist\dbt_project.yml> not found
+
+[0m20:28:51.854981 [debug] [MainThread]: Command `dbt debug` failed at 20:28:51.854981 after 2.94 seconds
+[0m20:28:51.854981 [debug] [MainThread]: Connection 'debug' was left open.
+[0m20:28:51.854981 [debug] [MainThread]: On debug: Close
+[0m20:28:51.950070 [debug] [MainThread]: Sending event: {'category': 'dbt', 'action': 'invocation', 'label': 'end', 'context': [<snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A185632F60>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A1A60CE540>, <snowplow_tracker.self_describing_json.SelfDescribingJson object at 0x000002A1A6D13D10>]}
+[0m20:28:51.951072 [debug] [MainThread]: Flushing usage events
+[0m20:28:52.114403 [debug] [MainThread]: An error was encountered while trying to flush usage events

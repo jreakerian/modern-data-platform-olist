@@ -2,7 +2,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'olist-lakehouse'
+name: 'olist_lakehouse'
 version: '1.0.0'
 
 # This setting configures which "profile" dbt uses for this project.
@@ -18,7 +18,7 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-clean-targets:         # directories to be removed by `dbt clean`
+clean-targets:         #directories to be removed by `dbt clean`
   - "target"
   - "dbt_packages"
 
@@ -30,7 +30,7 @@ clean-targets:         # directories to be removed by `dbt clean`
 # directory as views. These settings can be overridden in the individual model
 # files using the `{{ config(...) }}` macro.
 models:
-  olist-lakehouse:
+  olist_lakehouse:
     staging:
       +materialized: view
     intermediate:

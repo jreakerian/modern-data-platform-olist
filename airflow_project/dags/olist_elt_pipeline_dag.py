@@ -1,44 +1,26 @@
-from datetime import datetime, timedelta
-from airflow.providers.standard.operators.bash import BashOperator
+from __future__ import annotations
+
+import pendulum
 from airflow.models.dag import DAG
-
-
-
-
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
-    'start_date': datetime(2024, 1, 1),
-}
-
-# Use forward slashes for paths to avoid issues with escape characters in Python.
-# This path should point to the directory containing your dbt_project.yml file.
-DBT_PROJECT_DIR = 'dbt_project'
-# The profiles dir is often the same as the project dir, containing profiles.yml
-DBT_PROFILES_DIR = DBT_PROJECT_DIR
+from airflow.providers.dbt.cloud.operators.dbt import DbtCloudRunJobOperator
 
 with DAG(
-    dag_id='olist_elt_pipeline_v1',
-    default_args=default_args,
-    description='An ELT pipeline for the Olist dataset using dbt',
-    schedule_interval=timedelta(days=1),
+    dag_id="dbt_cloud_olist_pipeline",
+    start_date=pendulum.datetime(2023, 1, 1, tz="UTC"),
+    schedule=None,
     catchup=False,
-    tags=['dbt', 'olist'],
+    doc_md="""
+    ### Olist E-commerce dbt Cloud Pipeline
+    This DAG triggers a dbt Cloud job to transform the Olist e-commerce data.
+    """,
+    tags=["dbt-cloud"],
 ) as dag:
-    # This task runs your dbt models
-    dbt_run = BashOperator(
-        task_id='dbt_run',
-        bash_command=f"dbt run --project-dir '{DBT_PROJECT_DIR}' --profiles-dir '{DBT_PROFILES_DIR}'"
+    trigger_dbt_cloud_job = DbtCloudRunJobOperator(
+        task_id="trigger_dbt_build_job",
+        dbt_cloud_conn_id="dbt_cloud_default",
+        job_id=70471823485775,
+        check_interval=60,
+        timeout=3600,
+        wait_for_termination=True,
+        trigger_reason=f"Triggered via Airflow by task {{ti.task_id}} in the {{ti.dag_id}} DAG.",
     )
-
-    # This task tests your dbt models after they have run
-    dbt_test = BashOperator(
-        task_id='dbt_test',
-        bash_command=f"dbt test --project-dir '{DBT_PROJECT_DIR}' --profiles-dir '{DBT_PROFILES_DIR}'"
-    )
-
-    dbt_run >> dbt_test

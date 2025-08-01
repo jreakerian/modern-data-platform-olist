@@ -3,17 +3,30 @@
 This repository contains a complete, production-grade data engineering project that builds an ELT pipeline for the Olist E-commerce dataset. It demonstrates a modern data stack, implementing a Medallion Lakehouse architecture to ingest raw data, transform it through quality-gated layers, and serve it in an analytics-ready format for business intelligence.
 
 ---
+
 ## 📚 Table of Contents
-[Architectural Overview](-#architectural-overview)
-[Technology Stack](-#-technology-stack)
-[Project Structure](-#project-structure)
-[Setup and Installation](-#setup-and-installation)
-[Step 1: Prerequisites](#step-1-prerequisites)
-[Step 2: Cloud Infrastructure Setup (AWS & Snowflake)](#step-2-cloud-infrastructure-setup-aws--snowflake)
-[Step 3: dbt Cloud Configuration](#step-3-dbt-cloud-configuration)
-[Step 4: Airflow Orchestration Setup](#step-4-airflow-orchestration-setup)
-[Running the Pipeline](#running-the-pipeline)
-[Future Enhancements](#future-enhancements)
+
+1. [Architectural Overview](-#architectural-overview)
+
+2. [Technology Stack](-#-technology-stack)
+
+3. [Project Structure](-#project-structure)
+
+4. [Setup and Installation](-#setup-and-installation)
+
+5. [Step 1: Prerequisites](#step-1-prerequisites)
+
+6. [Step 2: Cloud Infrastructure Setup (AWS & Snowflake)](#step-2-cloud-infrastructure-setup-aws--snowflake)
+
+7. [Step 3: dbt Cloud Configuration](#step-3-dbt-cloud-configuration)
+
+8. [Step 4: Airflow Orchestration Setup](#step-4-airflow-orchestration-setup)
+
+9. [Running the Pipeline](#running-the-pipeline)
+
+10. [Future Enhancements](#future-enhancements)
+
+---
 
 ## Architectural Overview
 This project is built on a modern Lakehouse Architecture, which combines the cost-effective storage of a data lake with the performance and governance of a data warehouse. Data flows through a Medallion Architecture, ensuring quality and traceability across three distinct layers :

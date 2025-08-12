@@ -1,4 +1,4 @@
-# End-to-End E-commerce Data Pipeline with Snowflake, dbt Cloud & Airflow
+# The E-commerce Medallion Lakehouse: A Blueprint for a Snowflake-Powered Data Platform
 
 This repository contains a complete, production-grade data engineering project that builds an ELT pipeline for the Olist E-commerce dataset. It demonstrates a modern data stack, implementing a Medallion Lakehouse architecture to ingest raw data, transform it through quality-gated layers, and serve it in an analytics-ready format for business intelligence.
 

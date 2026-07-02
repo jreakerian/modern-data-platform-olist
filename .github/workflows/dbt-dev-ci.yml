@@ -67,13 +67,13 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           cd dbt_project
-          dbt build --select state:modified+ --defer --state target --target dev
+          dbt build --exclude package:elementary --select state:modified+ --defer --state target --target dev
 
       - name: Run dbt build (full on push)
         if: github.event_name == 'push'
         run: |
           cd dbt_project
-          dbt build --target dev
+          dbt build --exclude package:elementary --target dev
 
       - name: Run dbt test with store_failures
         run: |

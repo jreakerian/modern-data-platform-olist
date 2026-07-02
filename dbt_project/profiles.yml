@@ -1,0 +1,57 @@
+olist_lakehouse_profile:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', 'FOFOXOE-EEB51968') }}"
+      # Key-pair (RSA) auth
+      user: "{{ env_var('SNOWFLAKE_USER', 'CASHALOT1') }}"
+      private_key_path: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PATH', '../rsa_key.p8') }}"
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_PRIVATE_KEY_PASSPHRASE', 'eakerian') }}"
+
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'OLIST_ROLE') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'OLIST_LAKEHOUSE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      schema: dev
+      threads: 16
+      client_session_keep_alive: False
+      query_tag: eakerian
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false
+      retry_all: False  # default: false
+      reuse_connections: True # default: True if client_session_keep_alive is False, otherwise None
+    
+    
+    prod:
+      type: snowflake
+      account: FOFOXOE-EEB51968
+      user: CASHALOT1
+      password: gXZ!CE25mHy!:Fr
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'OLIST_ROLE') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'OLIST_LAKEHOUSE_PROD') }}"
+      schema: prod
+      threads: 16
+      client_session_keep_alive: False
+      query_tag: eakerian
+      connect_retries: 0 # default 0
+      connect_timeout: 10 # default: 10
+      retry_on_database_errors: False # default: false
+      retry_all: False  # default: false
+      reuse_connections: True # default: True if client_session_keep_alive is False, otherwise None
+
+
+elementary:
+  outputs:
+    default:
+      type: snowflake
+      account: FOFOXOE-EEB51968
+      user: CASHALOT1
+      password: gXZ!CE25mHy!:Fr
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'ACCOUNTADMIN') }}"
+      warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
+      database: "{{ env_var('SNOWFLAKE_DATABASE', 'OLIST_LAKEHOUSE_PROD') }}"
+      schema: prod_elementary
+      threads: 16
+  target: default

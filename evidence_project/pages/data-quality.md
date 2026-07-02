@@ -1,30 +1,17 @@
 ---
 title: Data Quality
 description: Data freshness, volume trends, and pipeline health
+queries:
+  - orders_all_time.sql
+  - orders_daily.sql
+  - items_daily.sql
+  - review_quality.sql
+  - review_kpis.sql
 ---
 
 # 🛡️ Data Quality & Pipeline Health
 
-```sql orders_daily
-select * from snowflake.orders_daily
-```
-
-```sql items_daily
-select * from snowflake.items_daily
-```
-
-```sql review_quality
-select * from snowflake.daily_review_quality
-```
-
-```sql review_kpis
-select
-    sum(total_reviews)                                               as total_reviews,
-    sum(negative_reviews)                                            as negative_reviews,
-    sum(total_reviews * negative_review_rate) / sum(total_reviews)   as negative_review_rate,
-    sum(total_reviews * average_review_score) / sum(total_reviews)   as average_review_score
-from snowflake.daily_review_quality
-```
+<DateRange name=range data={orders_all_time} dates=metric_time defaultValue="all time"/>
 
 <Alert status="info">
   Detailed anomaly detection results are available in the
@@ -41,6 +28,7 @@ from snowflake.daily_review_quality
   yFmt="num0"
   title="Daily Order Volume (anomaly detection baseline)"
   chartAreaHeight=300
+  echartsOptions={{ textStyle: { fontFamily: 'Playfair Display' } }}
 />
 
 ## Revenue Consistency Check
@@ -52,6 +40,7 @@ from snowflake.daily_review_quality
   yFmt="usd2"
   title="AOV Stability Over Time"
   chartAreaHeight=250
+  echartsOptions={{ textStyle: { fontFamily: 'Playfair Display' } }}
 />
 
 ## Items vs GMV Correlation
@@ -64,6 +53,7 @@ from snowflake.daily_review_quality
   yFmt="usd0"
   title="Items Sold vs GMV (each point = 1 day)"
   chartAreaHeight=300
+  echartsOptions={{ textStyle: { fontFamily: 'Playfair Display' } }}
 />
 
 ## Review Quality Monitoring
@@ -97,6 +87,7 @@ from snowflake.daily_review_quality
   y2Fmt="pct1"
   title="Daily Negative Reviews: Volume vs Rate"
   chartAreaHeight=250
+  echartsOptions={{ textStyle: { fontFamily: 'Playfair Display' } }}
 />
 
 <LineChart
@@ -106,6 +97,7 @@ from snowflake.daily_review_quality
   yFmt="num2"
   title="Average Review Score Trend"
   chartAreaHeight=250
+  echartsOptions={{ textStyle: { fontFamily: 'Playfair Display' } }}
 />
 
 ## Pipeline Architecture

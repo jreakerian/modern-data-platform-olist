@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
-    rev: v1.4.0
+    rev: v2.0.9
     hooks:
       - id: check-model-has-description
       - id: check-column-has-description

@@ -2,136 +2,25 @@
 max_line_length = 120
 dialect = snowflake
 templater = dbt
-ignore_errors = L006
 
 [sqlfluff:templater:dbt]
 project_dir = dbt_project/
 profiles_dir = dbt_project/
 
-rules = L001,L003,L004,L006,L009,L010,L011,L012,L014,L016,L019,L020,L021,L023,L024,L027,L028,L029,L030,L031,L032,L034,L036,L037,L038,L039,L041,L042,L044,L045,L047,L048,L049,L050,L051,L052,L053,L054,L055,L056,L057,L058,L059,L060,L061,L062,L063,L064
-
 [sqlfluff:rules]
 allow_scalar = True
 
-[sqlfluff:rules:L010]
+[sqlfluff:rules:capitalisation.keywords]
 capitalisation_policy = upper
 
-[sqlfluff:rules:L014]
+[sqlfluff:rules:capitalisation.identifiers]
 extended_capitalisation_policy = upper
 
-[sqlfluff:rules:L016]
+[sqlfluff:rules:capitalisation.functions]
+extended_capitalisation_policy = upper
+
+[sqlfluff:rules:capitalisation.literals]
 capitalisation_policy = upper
 
-[sqlfluff:rules:L019]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L020]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L021]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L023]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L024]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L027]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L028]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L029]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L030]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L031]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L032]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L034]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L036]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L037]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L038]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L039]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L041]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L042]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L044]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L045]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L047]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L048]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L049]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L050]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L051]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L052]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L053]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L054]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L055]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L056]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L057]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L058]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L059]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L060]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L061]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L062]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L063]
-capitalisation_policy = upper
-
-[sqlfluff:rules:L064]
-capitalisation_policy = upper
+[sqlfluff:rules:capitalisation.types]
+extended_capitalisation_policy = upper

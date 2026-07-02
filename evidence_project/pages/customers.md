@@ -5,12 +5,39 @@ description: Customer acquisition, retention, and geographic distribution
 
 # 👥 Customer Insights
 
+```sql customer_retention_all
+select * from snowflake.customer_retention
+```
+
+<DateRange name=range data={customer_retention_all} dates=metric_time defaultValue="all time"/>
+
 ```sql customers_kpi
 select * from snowflake.customers_kpi
 ```
 
+```sql repeat_buyers_donut
+select 'Customers' as grouping, 'Returning Buyers' as buyer_type, returning_customers as count from ${customers_kpi}
+union all
+select 'Customers' as grouping, 'One-Time Buyers' as buyer_type, total_customers - returning_customers as count from ${customers_kpi}
+```
+
 ```sql customer_retention
 select * from snowflake.customer_retention
+where metric_time between '${inputs.range.start}' and '${inputs.range.end}'
+```
+
+```sql cohort_retention_formatted
+select
+  (cohort_month || '-01')::timestamp as cohort_month,
+  cohort_size,
+  'Month' || lpad(CAST(months_elapsed AS INTEGER)::varchar, 2, '0') || '_pct' as month_offset,
+  retention_rate
+from snowflake.cohort_retention
+where (cohort_month || '-01') >= '${inputs.range.start}' and (cohort_month || '-01') <= '${inputs.range.end}'
+```
+
+```sql cohort_retention_pivot
+PIVOT ${cohort_retention_formatted} ON month_offset USING first(retention_rate)
 ```
 
 ```sql customers_geo
@@ -18,7 +45,7 @@ select * from snowflake.customers_geo
 ```
 
 ```sql reviews_summary
-select * from snowflake.reviews_summary
+select review_score::varchar as review_score, review_count from snowflake.reviews_summary
 ```
 
 ```sql top_cities_retention
@@ -27,7 +54,7 @@ select
     sum(total_customers)                                                            as total_customers,
     sum(returning_customers)                                                        as returning_customers,
     sum(total_customers * repeat_customer_rate) / nullif(sum(total_customers), 0)  as repeat_rate
-from snowflake.customer_retention
+from ${customer_retention}
 where customer_city is not null
 group by 1
 order by total_customers desc
@@ -46,41 +73,22 @@ limit 20
   comparisonFmt="num2"
 />
 
-<BigValue
-  data={customers_kpi}
-  value="returning_customers"
-  title="Returning Customers"
-  fmt="num0"
+<BarChart
+  data={repeat_buyers_donut}
+  x="grouping"
+  y="count"
+  series="buyer_type"
+  swapXY={true}
+  type="stacked100"
+  title="Repeat vs One-Time Buyers"
+  chartAreaHeight=120
 />
 
-<BigValue
-  data={customers_kpi}
-  value="repeat_customer_rate"
-  title="Repeat Customer Rate"
-  fmt="pct2"
-/>
+## Cohort Retention Matrix
 
-## Retention Metrics Over Time
+Customer Retention measures the percentage of each monthly customer cohort that purchases in a future month.
 
-<LineChart
-  data={customer_retention}
-  x="metric_time"
-  y={["total_customers", "returning_customers"]}
-  yFmt="num0"
-  title="New vs Returning Customers (Monthly)"
-  chartAreaHeight=300
-/>
-
-## Repeat Customer Rate
-
-<LineChart
-  data={customer_retention}
-  x="metric_time"
-  y="repeat_customer_rate"
-  yFmt="pct2"
-  title="Repeat Customer Rate"
-  chartAreaHeight=250
-/>
+<CohortTable data={cohort_retention_pivot} periodTitle="Cohort Month" valueFmt="pct2"/>
 
 ## Geographic Analysis
 
@@ -88,49 +96,45 @@ limit 20
 
 ## Top 20 Cities — Customers & Repeat Rate
 
-<BarChart
-  data={top_cities_retention}
-  x="city"
-  y="total_customers"
-  yFmt="num0"
-  title="Top 20 Cities by Customer Volume"
-  chartAreaHeight=300
-  sort="total_customers desc"
-/>
-
-<BarChart
-  data={top_cities_retention}
-  x="city"
-  y="repeat_rate"
-  yFmt="pct2"
-  title="Top 20 Cities by Repeat Customer Rate"
-  chartAreaHeight=300
-  sort="repeat_rate desc"
-/>
-
-## Top 20 Cities by Absolute Count
-
-<BarChart
-  data={customers_geo}
-  x="customer_city"
-  y="customer_count"
-  yFmt="num0"
-  title="Top 20 Cities by Customers"
-  chartAreaHeight=300
-  sort="customer_count desc"
-  rows=20
+<ECharts
+  config={{
+    dataset: { source: top_cities_retention },
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+    xAxis: { type: 'value', name: 'Total Customers' },
+    yAxis: { type: 'category', inverse: true },
+    visualMap: {
+      orient: 'horizontal',
+      left: 'center',
+      min: 0,
+      max: 0.05,
+      text: ['High Repeat Rate', 'Low Repeat Rate'],
+      dimension: 'repeat_rate',
+      inRange: {
+        color: ['#eff6ff', '#1e3a8a']
+      }
+    },
+    series: [
+      {
+        type: 'bar',
+        encode: {
+          x: 'total_customers',
+          y: 'city',
+          tooltip: ['total_customers', 'repeat_rate']
+        }
+      }
+    ]
+  }}
 />
 
 ## Customer Distribution by State
 
-<BarChart
+<AreaMap 
   data={customers_geo}
-  x="customer_state"
-  y="customer_count"
-  yFmt="num0"
+  geoJsonUrl="/brazil-states.geojson"
+  geoId="sigla"
+  areaCol="customer_state"
+  value="customer_count"
   title="Customers by State"
-  chartAreaHeight=300
-  sort="customer_count desc"
 />
 
 ## Review Score Distribution
@@ -139,6 +143,8 @@ limit 20
   data={reviews_summary}
   x="review_score"
   y="review_count"
+  swapXY={true}
+  sort="review_score desc"
   yFmt="num0"
   title="Review Score Distribution"
   chartAreaHeight=250

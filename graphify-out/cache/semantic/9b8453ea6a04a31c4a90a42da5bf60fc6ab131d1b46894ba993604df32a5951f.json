@@ -1,1 +1,0 @@
-{"nodes": [{"id": "dbt_project_models_marts_metricflow_time_spine_metricflow_time_spine", "label": "metricflow_time_spine", "file_type": "code", "source_file": "dbt_project/models/marts/metricflow_time_spine.yml", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}

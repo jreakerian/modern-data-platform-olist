@@ -58,3 +58,5 @@ ingestion/data/
 *.swo
 .DS_Store
 Thumbs.db
+graphify-out/
+evidence_project/duckdb_cli-linux-amd64.zip

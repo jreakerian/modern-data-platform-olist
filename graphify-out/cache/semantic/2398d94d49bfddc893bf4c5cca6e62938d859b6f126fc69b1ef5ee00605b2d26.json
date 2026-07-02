@@ -1,1 +1,0 @@
-{"nodes": [{"id": "dbt_project_models_intermediate_schema_int_order_payments_pivoted", "label": "int_order_payments_pivoted", "file_type": "code", "source_file": "dbt_project/models/intermediate/schema.yml", "source_location": null, "source_url": null, "captured_at": null, "author": null, "contributor": null}], "edges": [], "hyperedges": []}

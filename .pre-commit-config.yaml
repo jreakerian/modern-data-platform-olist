@@ -5,7 +5,7 @@ repos:
       - id: check-model-has-description
       - id: check-model-columns-have-desc
       - id: check-model-has-tests
-      - id: check-model-contract
+      - id: check-model-has-contract
       - id: check-unique-key-exists
       - id: check-model-materialization
       - id: check-source-has-description

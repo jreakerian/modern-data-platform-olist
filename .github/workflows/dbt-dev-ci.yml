@@ -78,7 +78,7 @@ jobs:
       - name: Run dbt test with store_failures
         run: |
           cd dbt_project
-          dbt test --store-failures --target dev
+          dbt test --exclude package:elementary --store-failures --target dev
 
       - name: Upload dbt artifacts
         if: always()

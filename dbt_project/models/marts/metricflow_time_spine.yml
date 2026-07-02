@@ -10,3 +10,6 @@ models:
         data_type: date
         description: "One row per calendar day. Used as the time anchor for all MetricFlow metric queries."
         granularity: day
+        tests:
+          - unique
+          - not_null

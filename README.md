@@ -69,8 +69,15 @@ The project follows a modern DataOps workflow:
 3. **Transformation:** dbt builds the Medallion layers:
    - **Bronze:** External tables pointing to S3.
    - **Silver:** Cleaned views with standardized types.
-   - **Gold:** Optimized analytical tables.
+   - **Gold:** Optimized analytical tables (using dbt Microbatch incremental strategy).
 4. **Orchestration:** Airflow manages the execution graph and handles retries and alerting.
+5. **CI/CD:** GitHub Actions automatically tests and deploys changes on pull requests.
+
+## 8. BI & Data Visualization
+To make the data actionable, the pipeline connects to a front-end **Evidence BI Dashboard**:
+- Powered by **dbt's MetricFlow Semantic Layer**.
+- Native connection to the Snowflake Gold Layer (`fct_orders`, `dim_customers`).
+- Renders KPI metrics, revenue trends, and data quality reports via markdown-driven analytics.
 
 ---
 
@@ -125,8 +132,6 @@ Apply the SQL found in `snowflake_setup/` to establish the Storage Integration b
 
 This project provides a solid foundation that can be extended with more advanced features:
 
-*   **Incremental Models**: Convert the `fct_orders` model to an incremental model to optimize performance and reduce costs on subsequent runs.
-- [x] **Incremental Models**: Transitioned `fct_orders` to dbt Microbatch incremental strategy.
-*   **CI/CD Integration**: Use dbt Cloud's built-in CI/CD features or GitHub Actions to automatically test and deploy changes on pull requests.
-*   **Advanced Data Quality**: Incorporate packages like `dbt-expectations` for more comprehensive and expressive data quality testing.
-*   **Data Visualization**: Connect a BI tool like Tableau to the Gold layer tables in Snowflake to build an executive dashboard.
+*   **Real-time Streaming**: Integrate Apache Kafka or Snowpipe for continuous real-time ingestion instead of batch processing.
+*   **Machine Learning**: Feed the `dim_customers` and `fct_orders` data into a feature store for predictive modeling (e.g., Churn Prediction, Product Recommendations).
+*   **Data Lineage Tracking**: Implement Atlan or Datahub for comprehensive end-to-end data lineage and governance.

@@ -41,7 +41,7 @@ resource "aws_iam_role" "snowflake_role" {
         Condition = {
           StringEquals = {
             # Only enforce ExternalId if we are using the real Snowflake Principal
-            "sts:ExternalId" = var.snowflake_external_id 
+            "sts:ExternalId" = var.snowflake_external_id
           }
         }
       }

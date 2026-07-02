@@ -128,7 +128,7 @@ Customer Retention measures the percentage of each monthly customer cohort that 
 
 ## Customer Distribution by State
 
-<AreaMap 
+<AreaMap
   data={customers_geo}
   geoJsonUrl="/brazil-states.geojson"
   geoId="sigla"

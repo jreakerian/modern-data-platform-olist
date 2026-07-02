@@ -101,8 +101,8 @@ limit 30
     legend: { bottom: 0 },
     grid: { left: 60, right: 60, top: 60, bottom: 40 },
     dataset: { source: orders_daily },
-    xAxis: { 
-      type: 'category', 
+    xAxis: {
+      type: 'category',
       boundaryGap: true,
       axisLabel: {
         formatter: function (value) {
@@ -113,15 +113,15 @@ limit 30
       }
     },
     yAxis: [
-      { 
-        type: 'value', 
-        name: 'Revenue ($)', 
+      {
+        type: 'value',
+        name: 'Revenue ($)',
         axisLabel: { formatter: '${value}' },
         splitLine: { show: true, lineStyle: { color: '#f3f4f6' } }
       },
-      { 
-        type: 'value', 
-        name: 'Orders', 
+      {
+        type: 'value',
+        name: 'Orders',
         position: 'right',
         splitLine: { show: false }
       }

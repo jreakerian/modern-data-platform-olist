@@ -21,8 +21,8 @@ olist_lakehouse_profile:
       retry_on_database_errors: False # default: false
       retry_all: False  # default: false
       reuse_connections: True # default: True if client_session_keep_alive is False, otherwise None
-    
-    
+
+
     prod:
       type: snowflake
       account: FOFOXOE-EEB51968

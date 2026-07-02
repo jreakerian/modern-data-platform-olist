@@ -50,7 +50,7 @@ models:
       +contract:
         enforced: true
     marts:
-      +schema: gold     
+      +schema: gold
       +materialized: table
       +contract:
         enforced: true

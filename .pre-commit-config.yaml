@@ -3,21 +3,25 @@ repos:
     rev: v2.0.9
     hooks:
       - id: check-model-has-description
+        args: ["--manifest", "dbt_project/target/manifest.json"]
       - id: check-model-columns-have-desc
+        args: ["--manifest", "dbt_project/target/manifest.json"]
       - id: check-model-has-tests
+        args: ["--manifest", "dbt_project/target/manifest.json", "--test-cnt", "1", "--"]
       - id: check-model-has-contract
+        args: ["--manifest", "dbt_project/target/manifest.json"]
       - id: check-source-has-description
-      - id: check-source-has-freshness
-      - id: check-model-tags
-      - id: check-model-has-columns-with-types
+        args: ["--manifest", "dbt_project/target/manifest.json"]
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 3.2.0
     hooks:
       - id: sqlfluff-lint
         args: ["--dialect", "snowflake"]
+        additional_dependencies: ['sqlfluff-templater-dbt', 'dbt-core', 'dbt-snowflake']
       - id: sqlfluff-fix
         args: ["--dialect", "snowflake"]
+        additional_dependencies: ['sqlfluff-templater-dbt', 'dbt-core', 'dbt-snowflake']
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0

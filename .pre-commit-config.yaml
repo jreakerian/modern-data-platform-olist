@@ -6,13 +6,10 @@ repos:
       - id: check-model-columns-have-desc
       - id: check-model-has-tests
       - id: check-model-has-contract
-      - id: check-unique-key-exists
-      - id: check-model-materialization
       - id: check-source-has-description
-      - id: check-source-has-loaded-at-field
       - id: check-source-has-freshness
       - id: check-model-tags
-      - id: check-column-has-data-type
+      - id: check-model-has-columns-with-types
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 3.2.0

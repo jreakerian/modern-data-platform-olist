@@ -20,9 +20,9 @@ try:
             FROM dim_customers
             GROUP BY customer_state, customer_city
         )
-        SELECT 
-            customer_state, 
-            TRIM(LOWER(customer_city)) as clean_city, 
+        SELECT
+            customer_state,
+            TRIM(LOWER(customer_city)) as clean_city,
             COUNT(*) as unique_groups,
             ARRAY_AGG(customer_city) as original_names
         FROM grouped

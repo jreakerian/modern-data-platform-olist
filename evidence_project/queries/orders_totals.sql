@@ -1,4 +1,4 @@
-select 
+select
     sum(total_orders) as total_orders,
     sum(total_revenue) as total_revenue,
     sum(total_orders * average_order_value) / sum(total_orders) as average_order_value,

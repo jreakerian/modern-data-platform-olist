@@ -47,7 +47,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install dbt-snowflake dbt-checkpoint sqlfluff elementary-data
+          pip install dbt-snowflake sqlfluff elementary-data pre-commit
 
       - name: Install dbt packages
         run: |
@@ -59,15 +59,9 @@ jobs:
           cd dbt_project
           dbt parse
 
-      - name: Run dbt-checkpoint
+      - name: Run pre-commit checks
         run: |
-          cd dbt_project
-          dbt-checkpoint
-
-      - name: Run sqlfluff lint
-        run: |
-          cd dbt_project
-          sqlfluff lint --dialect snowflake models/
+          pre-commit run --all-files
 
       - name: Run dbt build (slim CI - only modified)
         if: github.event_name == 'pull_request'

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  --monospace-font-family: monospace;
+  --ui-font-family: "Playfair Display", serif;
+  --ui-font-family-compact: "Playfair Display", serif;
+  --ui-font-family-heading: "Playfair Display", serif;
+}
+
+/* Ensure the markdown class uses the Playfair Display font stack */
+:global(.markdown) {
+  font-family: "Playfair Display", serif !important;
+}
+
+:global(h1), :global(h2), :global(h3), :global(h4), :global(h5), :global(h6) {
+  font-family: "Playfair Display", serif !important;
+}

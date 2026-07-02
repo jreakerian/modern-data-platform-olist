@@ -1,4 +1,4 @@
--- This test reconciles the aggregated sales metrics in dim_products 
+-- This test reconciles the aggregated sales metrics in dim_products
 -- back to the original grain in stg_olist_order_items.
 -- It ensures that no units sold or revenues are lost or double-counted during the aggregation in the mart.
 

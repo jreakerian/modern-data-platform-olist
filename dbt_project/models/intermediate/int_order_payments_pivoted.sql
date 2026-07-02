@@ -2,7 +2,7 @@
 
 {%- set payment_methods = ['boleto', 'credit_card', 'voucher', 'debit_card'] -%}
 
-with PAYMENTS AS (
+WITH PAYMENTS AS (
     SELECT * FROM {{ ref('stg_olist_order_payments') }}
 ),
 

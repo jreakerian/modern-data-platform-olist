@@ -25,9 +25,9 @@ olist_lakehouse_profile:
 
     prod:
       type: snowflake
-      account: FOFOXOE-EEB51968
-      user: CASHALOT1
-      password: gXZ!CE25mHy!:Fr
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
       role: "{{ env_var('SNOWFLAKE_ROLE', 'OLIST_ROLE') }}"
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
       database: "{{ env_var('SNOWFLAKE_DATABASE', 'OLIST_LAKEHOUSE_PROD') }}"
@@ -46,9 +46,9 @@ elementary:
   outputs:
     default:
       type: snowflake
-      account: FOFOXOE-EEB51968
-      user: CASHALOT1
-      password: gXZ!CE25mHy!:Fr
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT') }}"
+      user: "{{ env_var('SNOWFLAKE_USER') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD') }}"
       role: "{{ env_var('SNOWFLAKE_ROLE', 'ACCOUNTADMIN') }}"
       warehouse: "{{ env_var('SNOWFLAKE_WAREHOUSE', 'COMPUTE_WH') }}"
       database: "{{ env_var('SNOWFLAKE_DATABASE', 'OLIST_LAKEHOUSE_PROD') }}"

@@ -61,3 +61,9 @@ tests:
 
 snapshots:
   +schema: snapshots
+
+vars:
+  disable_run_results: "{{ target.name != 'prod' }}"
+  disable_tests_results: "{{ target.name != 'prod' }}"
+  disable_dbt_artifacts_autoupload: "{{ target.name != 'prod' }}"
+  disable_dbt_invocation_autoupload: "{{ target.name != 'prod' }}"

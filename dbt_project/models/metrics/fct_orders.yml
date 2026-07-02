@@ -137,4 +137,3 @@ saved_queries:
         config:
           export_as: table
           schema: "{{ 'prod_gold' if target.name == 'prod' else 'dev_gold' }}"
-

@@ -79,8 +79,8 @@ with DAG(
     doc_md="""\
 ### Olist E-commerce ELT Pipeline
 
-**Owner:** Analytics Engineering  
-**Schedule:** Daily at 06:00 UTC  
+**Owner:** Analytics Engineering
+**Schedule:** Daily at 06:00 UTC
 
 #### Pipeline overview
 

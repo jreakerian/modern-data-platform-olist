@@ -1,20 +1,20 @@
-WITH reviews AS (
+WITH REVIEWS AS (
     SELECT * FROM {{ ref('stg_olist_order_reviews') }}
 ),
 
-orders AS (
+ORDERS AS (
     SELECT * FROM {{ ref('stg_olist_orders') }}
 )
 
 SELECT
-    r.review_id,
-    r.order_id,
-    o.customer_id,
-    o.order_status,
-    r.review_score,
-    r.review_comment_title,
-    r.review_comment_message,
-    r.review_creation_date,
-    r.review_answer_timestamp
-FROM reviews r
-LEFT JOIN orders o ON r.order_id = o.order_id
+    R.REVIEW_ID,
+    R.ORDER_ID,
+    O.CUSTOMER_ID,
+    O.ORDER_STATUS,
+    R.REVIEW_SCORE,
+    R.REVIEW_COMMENT_TITLE,
+    R.REVIEW_COMMENT_MESSAGE,
+    R.REVIEW_CREATION_DATE,
+    R.REVIEW_ANSWER_TIMESTAMP
+FROM REVIEWS AS R
+LEFT JOIN ORDERS AS O ON R.ORDER_ID = O.ORDER_ID

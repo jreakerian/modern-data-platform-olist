@@ -1,0 +1,7 @@
+name: snowflake
+type: snowflake
+options:
+  account: FOFOXOE-EEB51968
+  warehouse: COMPUTE_WH
+  database: OLIST_LAKEHOUSE_PROD
+  role: OLIST_ROLE

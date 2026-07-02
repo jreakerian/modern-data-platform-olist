@@ -1,28 +1,28 @@
-with 
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_order_reviews_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_order_reviews_dataset') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        review_id::varchar as review_id,
-        order_id::varchar as order_id,
-        review_score::number as review_score,
-        review_comment_title::varchar as review_comment_title,
-        review_comment_message::varchar as review_comment_message,
-        review_creation_date::timestamp_ntz as review_creation_date,
-        review_answer_timestamp::timestamp_ntz as review_answer_timestamp
+    SELECT
+        REVIEW_ID::VARCHAR AS REVIEW_ID,
+        ORDER_ID::VARCHAR AS ORDER_ID,
+        REVIEW_SCORE::NUMBER AS REVIEW_SCORE,
+        REVIEW_COMMENT_TITLE::VARCHAR AS REVIEW_COMMENT_TITLE,
+        REVIEW_COMMENT_MESSAGE::VARCHAR AS REVIEW_COMMENT_MESSAGE,
+        REVIEW_CREATION_DATE::TIMESTAMP_NTZ AS REVIEW_CREATION_DATE,
+        REVIEW_ANSWER_TIMESTAMP::TIMESTAMP_NTZ AS REVIEW_ANSWER_TIMESTAMP
 
-    from source
-    qualify row_number() over (
-        partition by review_id
-        order by review_creation_date desc
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY REVIEW_ID
+        ORDER BY REVIEW_CREATION_DATE DESC
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

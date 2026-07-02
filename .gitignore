@@ -29,7 +29,6 @@ olist_venv/
 dbt_project/target/
 dbt_project/dbt_packages/
 dbt_project/logs/
-dbt_project/profiles.yml
 dbt_project/.user.yml
 dbt_project/edr_target/
 dbt_project/tests/profiles.yml
@@ -59,3 +58,5 @@ ingestion/data/
 *.swo
 .DS_Store
 Thumbs.db
+graphify-out/
+evidence_project/duckdb_cli-linux-amd64.zip

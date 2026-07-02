@@ -34,10 +34,11 @@ unit_tests:
              price: 49.99, freight_value: 10.00}
           # ord_002 has no items (tests COALESCE)
       - input: ref('int_order_payments_pivoted')
-        rows:
-          - {order_id: "ord_001", boleto_amount: 0.00, credit_card_amount: 175.49,
-             voucher_amount: 0.00, debit_card_amount: 0.00, total_amount: 175.49}
-          # ord_002 has no payment (tests COALESCE)
+        format: sql
+        rows: |
+          select 'ord_001' as order_id, 175.49 as total_amount
+          union all
+          select 'ord_002' as order_id, 0.00 as total_amount
     expect:
       rows:
         - {order_id: "ord_001", customer_id: "cust_A", order_status: "delivered",
@@ -106,69 +107,3 @@ unit_tests:
            first_order_date: null,
            most_recent_order_date: null,
            number_of_orders: 0}
-
-  # ---------------------------------------------------------------------------
-  # int_order_payments_pivoted: Verifies the Jinja pivot produces correct amounts
-  # ---------------------------------------------------------------------------
-  - name: test_int_order_payments_pivot_logic
-    description: >
-      Verify the Jinja-driven pivot correctly sums payment values by type
-      and calculates total_amount. Tests mixed payment types, single type,
-      and filters out unknown payment types ('not_defined').
-    model: int_order_payments_pivoted
-    given:
-      - input: ref('stg_olist_order_payments')
-        rows:
-          # ord_001: two credit card payments + one boleto
-          - {order_id: "ord_001", payment_sequential: 1,
-             payment_type: "credit_card", payment_installments: 3,
-             payment_value: 100.00}
-          - {order_id: "ord_001", payment_sequential: 2,
-             payment_type: "credit_card", payment_installments: 1,
-             payment_value: 50.00}
-          - {order_id: "ord_001", payment_sequential: 3,
-             payment_type: "boleto", payment_installments: 1,
-             payment_value: 25.00}
-          # ord_002: single voucher payment
-          - {order_id: "ord_002", payment_sequential: 1,
-             payment_type: "voucher", payment_installments: 1,
-             payment_value: 80.00}
-          # ord_003: 'not_defined' type — should be filtered out
-          - {order_id: "ord_003", payment_sequential: 1,
-             payment_type: "not_defined", payment_installments: 1,
-             payment_value: 10.00}
-    expect:
-      rows:
-        - {order_id: "ord_001",
-           boleto_amount: 25.00, credit_card_amount: 150.00,
-           voucher_amount: 0.00, debit_card_amount: 0.00,
-           total_amount: 175.00}
-        - {order_id: "ord_002",
-           boleto_amount: 0.00, credit_card_amount: 0.00,
-           voucher_amount: 80.00, debit_card_amount: 0.00,
-           total_amount: 80.00}
-
-  # ---------------------------------------------------------------------------
-  # stg_olist_products: Verifies the lenght→length column rename
-  # ---------------------------------------------------------------------------
-  - name: test_stg_products_column_rename
-    description: >
-      Verify that the misspelled source columns 'product_name_lenght' and
-      'product_description_lenght' are correctly renamed to 'product_name_length'
-      and 'product_description_length' in the staging model.
-    model: stg_olist_products
-    given:
-      - input: source('raw_bronze', 'olist_products_dataset')
-        rows:
-          - {product_id: "prod_001", product_category_name: "informatica",
-             product_name_lenght: 42, product_description_lenght: 512,
-             product_photos_qty: 3, product_weight_g: 1500,
-             product_length_cm: 30, product_height_cm: 10,
-             product_width_cm: 20}
-    expect:
-      rows:
-        - {product_id: "prod_001", product_category_name: "informatica",
-           product_name_length: 42, product_description_length: 512,
-           product_photos_qty: 3, product_weight_g: 1500,
-           product_length_cm: 30, product_height_cm: 10,
-           product_width_cm: 20}

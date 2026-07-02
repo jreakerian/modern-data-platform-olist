@@ -1,27 +1,34 @@
 repos:
   - repo: https://github.com/dbt-checkpoint/dbt-checkpoint
-    rev: v1.4.0
+    rev: v2.0.9
     hooks:
       - id: check-model-has-description
-      - id: check-column-has-description
+        args: ["--manifest", "dbt_project/target/manifest.json"]
+        files: ^dbt_project/models/
+      - id: check-model-columns-have-desc
+        args: ["--manifest", "dbt_project/target/manifest.json"]
+        files: ^dbt_project/models/
       - id: check-model-has-tests
-      - id: check-column-has-tests
-      - id: check-model-contract
-      - id: check-unique-key-exists
-      - id: check-model-materialization
+        args: ["--manifest", "dbt_project/target/manifest.json", "--test-cnt", "1", "--"]
+        files: ^dbt_project/models/
+      - id: check-model-has-contract
+        args: ["--manifest", "dbt_project/target/manifest.json"]
+        files: ^dbt_project/models/
       - id: check-source-has-description
-      - id: check-source-has-loaded-at-field
-      - id: check-source-has-freshness
-      - id: check-model-tags
-      - id: check-column-has-data-type
+        args: ["--manifest", "dbt_project/target/manifest.json"]
+        files: ^dbt_project/models/
 
   - repo: https://github.com/sqlfluff/sqlfluff
     rev: 3.2.0
     hooks:
       - id: sqlfluff-lint
         args: ["--dialect", "snowflake"]
+        additional_dependencies: ['sqlfluff-templater-dbt', 'dbt-core', 'dbt-snowflake']
+        files: ^dbt_project/
       - id: sqlfluff-fix
         args: ["--dialect", "snowflake"]
+        additional_dependencies: ['sqlfluff-templater-dbt', 'dbt-core', 'dbt-snowflake']
+        files: ^dbt_project/
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v5.0.0

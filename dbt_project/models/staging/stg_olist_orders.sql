@@ -1,27 +1,27 @@
-with source as (
+WITH SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_orders_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_orders_dataset') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        order_id::varchar as order_id,
-        customer_id::varchar as customer_id,
-        order_status::varchar as order_status,
-        order_purchase_timestamp::timestamp_ntz as order_purchase_timestamp,
-        order_approved_at::timestamp_ntz as order_approved_at,
-        order_delivered_carrier_date::timestamp_ntz as order_delivered_carrier_date,
-        order_delivered_customer_date::timestamp_ntz as order_delivered_customer_date,
-        order_estimated_delivery_date::timestamp_ntz as order_estimated_delivery_date
+    SELECT
+        ORDER_ID::VARCHAR AS ORDER_ID,
+        CUSTOMER_ID::VARCHAR AS CUSTOMER_ID,
+        ORDER_STATUS::VARCHAR AS ORDER_STATUS,
+        ORDER_PURCHASE_TIMESTAMP::TIMESTAMP_NTZ AS ORDER_PURCHASE_TIMESTAMP,
+        ORDER_APPROVED_AT::TIMESTAMP_NTZ AS ORDER_APPROVED_AT,
+        ORDER_DELIVERED_CARRIER_DATE::TIMESTAMP_NTZ AS ORDER_DELIVERED_CARRIER_DATE,
+        ORDER_DELIVERED_CUSTOMER_DATE::TIMESTAMP_NTZ AS ORDER_DELIVERED_CUSTOMER_DATE,
+        ORDER_ESTIMATED_DELIVERY_DATE::TIMESTAMP_NTZ AS ORDER_ESTIMATED_DELIVERY_DATE
 
-    from source
-    qualify row_number() over (
-        partition by order_id
-        order by order_purchase_timestamp desc
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ORDER_ID
+        ORDER BY ORDER_PURCHASE_TIMESTAMP DESC
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

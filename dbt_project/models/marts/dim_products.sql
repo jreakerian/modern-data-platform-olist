@@ -1,54 +1,54 @@
-WITH products AS (
+WITH PRODUCTS AS (
     SELECT * FROM {{ ref('stg_olist_products') }}
 ),
 
-translations AS (
+TRANSLATIONS AS (
     SELECT * FROM {{ ref('stg_product_category_name_translation') }}
 ),
 
-order_items AS (
+ORDER_ITEMS AS (
     SELECT * FROM {{ ref('stg_olist_order_items') }}
 ),
 
-order_reviews AS (
+ORDER_REVIEWS AS (
     SELECT * FROM {{ ref('stg_olist_order_reviews') }}
 ),
 
-product_sales AS (
+PRODUCT_SALES AS (
     SELECT
-        product_id,
-        COUNT(order_item_id) AS total_units_sold,
-        SUM(price) AS total_revenue_generated
-    FROM order_items
+        PRODUCT_ID,
+        COUNT(ORDER_ITEM_ID) AS TOTAL_UNITS_SOLD,
+        SUM(PRICE) AS TOTAL_REVENUE_GENERATED
+    FROM ORDER_ITEMS
     GROUP BY 1
 ),
 
-product_reviews AS (
+PRODUCT_REVIEWS AS (
     SELECT
-        oi.product_id,
-        ROUND(AVG(r.review_score), 2) AS average_review_score,
-        COUNT(DISTINCT r.review_id) AS total_reviews
-    FROM order_items oi
-    JOIN order_reviews r ON oi.order_id = r.order_id
+        OI.PRODUCT_ID,
+        ROUND(AVG(R.REVIEW_SCORE), 2) AS AVERAGE_REVIEW_SCORE,
+        COUNT(DISTINCT R.REVIEW_ID) AS TOTAL_REVIEWS
+    FROM ORDER_ITEMS AS OI
+    INNER JOIN ORDER_REVIEWS AS R ON OI.ORDER_ID = R.ORDER_ID
     GROUP BY 1
 )
 
 SELECT
-    p.product_id,
-    p.product_category_name,
-    t.product_category_name_english,
-    p.product_name_length,
-    p.product_description_length,
-    p.product_photos_qty,
-    p.product_weight_g,
-    p.product_length_cm,
-    p.product_height_cm,
-    p.product_width_cm,
-    COALESCE(s.total_units_sold, 0) AS total_units_sold,
-    COALESCE(s.total_revenue_generated, 0.00) AS total_revenue_generated,
-    r.average_review_score,
-    COALESCE(r.total_reviews, 0) AS total_reviews
-FROM products p
-LEFT JOIN translations t ON p.product_category_name = t.product_category_name
-LEFT JOIN product_sales s ON p.product_id = s.product_id
-LEFT JOIN product_reviews r ON p.product_id = r.product_id
+    P.PRODUCT_ID,
+    P.PRODUCT_CATEGORY_NAME,
+    T.PRODUCT_CATEGORY_NAME_ENGLISH,
+    P.PRODUCT_NAME_LENGTH,
+    P.PRODUCT_DESCRIPTION_LENGTH,
+    P.PRODUCT_PHOTOS_QTY,
+    P.PRODUCT_WEIGHT_G,
+    P.PRODUCT_LENGTH_CM,
+    P.PRODUCT_HEIGHT_CM,
+    P.PRODUCT_WIDTH_CM,
+    R.AVERAGE_REVIEW_SCORE,
+    COALESCE(S.TOTAL_UNITS_SOLD, 0) AS TOTAL_UNITS_SOLD,
+    COALESCE(S.TOTAL_REVENUE_GENERATED, 0.00) AS TOTAL_REVENUE_GENERATED,
+    COALESCE(R.TOTAL_REVIEWS, 0) AS TOTAL_REVIEWS
+FROM PRODUCTS AS P
+LEFT JOIN TRANSLATIONS AS T ON P.PRODUCT_CATEGORY_NAME = T.PRODUCT_CATEGORY_NAME
+LEFT JOIN PRODUCT_SALES AS S ON P.PRODUCT_ID = S.PRODUCT_ID
+LEFT JOIN PRODUCT_REVIEWS AS R ON P.PRODUCT_ID = R.PRODUCT_ID

@@ -57,7 +57,6 @@ models:
     config:
       contract:
         enabled: true
-      event_time: order_purchase_timestamp
     columns:
       - name: order_id
         data_type: varchar

@@ -10,11 +10,11 @@
         )
     }}
 
-    select
-        seller_id,
-        seller_zip_code_prefix,
-        seller_city,
-        seller_state
-    from {{ ref('stg_olist_sellers') }}
+    SELECT
+        SELLER_ID,
+        SELLER_ZIP_CODE_PREFIX,
+        SELLER_CITY,
+        SELLER_STATE
+    FROM {{ ref('stg_olist_sellers') }}
 
 {% endsnapshot %}

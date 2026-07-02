@@ -1,30 +1,30 @@
-with 
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_products_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_products_dataset') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        product_id::varchar as product_id,
-        product_category_name::varchar as product_category_name,
-        product_name_lenght::number as product_name_length,
-        product_description_lenght::number as product_description_length,
-        product_photos_qty::number as product_photos_qty,
-        product_weight_g::number as product_weight_g,
-        product_length_cm::number as product_length_cm,
-        product_height_cm::number as product_height_cm,
-        product_width_cm::number as product_width_cm
+    SELECT
+        PRODUCT_ID::VARCHAR AS PRODUCT_ID,
+        PRODUCT_CATEGORY_NAME::VARCHAR AS PRODUCT_CATEGORY_NAME,
+        PRODUCT_NAME_LENGHT::NUMBER AS PRODUCT_NAME_LENGTH,
+        PRODUCT_DESCRIPTION_LENGHT::NUMBER AS PRODUCT_DESCRIPTION_LENGTH,
+        PRODUCT_PHOTOS_QTY::NUMBER AS PRODUCT_PHOTOS_QTY,
+        PRODUCT_WEIGHT_G::NUMBER AS PRODUCT_WEIGHT_G,
+        PRODUCT_LENGTH_CM::NUMBER AS PRODUCT_LENGTH_CM,
+        PRODUCT_HEIGHT_CM::NUMBER AS PRODUCT_HEIGHT_CM,
+        PRODUCT_WIDTH_CM::NUMBER AS PRODUCT_WIDTH_CM
 
-    from source
-    qualify row_number() over (
-        partition by product_id
-        order by product_id
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY PRODUCT_ID
+        ORDER BY PRODUCT_ID
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

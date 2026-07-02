@@ -1,48 +1,48 @@
-WITH customers AS (
+WITH CUSTOMERS AS (
     SELECT * FROM {{ ref('stg_olist_customers') }}
 ),
 
-orders AS (
+ORDERS AS (
     SELECT * FROM {{ ref('stg_olist_orders') }}
 ),
 
 -- Aggregate order metrics per physical customer (customer_unique_id),
 -- bridging through customer_id since orders only carry customer_id.
-customer_orders AS (
+CUSTOMER_ORDERS AS (
     SELECT
-        c.customer_unique_id,
-        MIN(o.order_purchase_timestamp) AS first_order_date,
-        MAX(o.order_purchase_timestamp) AS most_recent_order_date,
-        COUNT(o.order_id)               AS number_of_orders
-    FROM customers c
-    LEFT JOIN orders o ON c.customer_id = o.customer_id
-    GROUP BY c.customer_unique_id
+        C.CUSTOMER_UNIQUE_ID,
+        MIN(O.ORDER_PURCHASE_TIMESTAMP) AS FIRST_ORDER_DATE,
+        MAX(O.ORDER_PURCHASE_TIMESTAMP) AS MOST_RECENT_ORDER_DATE,
+        COUNT(O.ORDER_ID) AS NUMBER_OF_ORDERS
+    FROM CUSTOMERS AS C
+    LEFT JOIN ORDERS AS O ON C.CUSTOMER_ID = O.CUSTOMER_ID
+    GROUP BY C.CUSTOMER_UNIQUE_ID
 ),
 
 -- Collapse the staging customers table to one row per unique person.
 -- customer_zip_code_prefix, city, and state are taken from the most
 -- recently seen customer record to reflect the latest known address.
-deduped_customers AS (
+DEDUPED_CUSTOMERS AS (
     SELECT
-        customer_unique_id,
-        customer_zip_code_prefix,
-        customer_city,
-        customer_state,
+        CUSTOMER_UNIQUE_ID,
+        CUSTOMER_ZIP_CODE_PREFIX,
+        CUSTOMER_CITY,
+        CUSTOMER_STATE,
         ROW_NUMBER() OVER (
-            PARTITION BY customer_unique_id
-            ORDER BY customer_zip_code_prefix DESC
-        ) AS rn
-    FROM customers
+            PARTITION BY CUSTOMER_UNIQUE_ID
+            ORDER BY CUSTOMER_ZIP_CODE_PREFIX DESC
+        ) AS RN
+    FROM CUSTOMERS
 )
 
 SELECT
-    dc.customer_unique_id,
-    dc.customer_zip_code_prefix,
-    dc.customer_city,
-    dc.customer_state,
-    co.first_order_date,
-    co.most_recent_order_date,
-    COALESCE(co.number_of_orders, 0) AS number_of_orders
-FROM deduped_customers dc
-LEFT JOIN customer_orders co ON dc.customer_unique_id = co.customer_unique_id
-WHERE dc.rn = 1
+    DC.CUSTOMER_UNIQUE_ID,
+    DC.CUSTOMER_ZIP_CODE_PREFIX,
+    DC.CUSTOMER_CITY,
+    DC.CUSTOMER_STATE,
+    CO.FIRST_ORDER_DATE,
+    CO.MOST_RECENT_ORDER_DATE,
+    COALESCE(CO.NUMBER_OF_ORDERS, 0) AS NUMBER_OF_ORDERS
+FROM DEDUPED_CUSTOMERS AS DC
+LEFT JOIN CUSTOMER_ORDERS AS CO ON DC.CUSTOMER_UNIQUE_ID = CO.CUSTOMER_UNIQUE_ID
+WHERE DC.RN = 1

@@ -1,25 +1,25 @@
-with
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_sellers_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_sellers_dataset') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        seller_id::varchar as seller_id,
-        seller_zip_code_prefix::varchar as seller_zip_code_prefix,
-        seller_city::varchar as seller_city,
-        seller_state::varchar as seller_state
+    SELECT
+        SELLER_ID::VARCHAR AS SELLER_ID,
+        SELLER_ZIP_CODE_PREFIX::VARCHAR AS SELLER_ZIP_CODE_PREFIX,
+        SELLER_CITY::VARCHAR AS SELLER_CITY,
+        SELLER_STATE::VARCHAR AS SELLER_STATE
 
-    from source
-    qualify row_number() over (
-        partition by seller_id
-        order by seller_id
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY SELLER_ID
+        ORDER BY SELLER_ID
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

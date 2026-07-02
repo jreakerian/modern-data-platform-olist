@@ -1,23 +1,23 @@
-with
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'product_category_name_translation') }}
+    SELECT * FROM {{ source('raw_bronze', 'product_category_name_translation') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        product_category_name::varchar as product_category_name,
-        product_category_name_english::varchar as product_category_name_english
+    SELECT
+        PRODUCT_CATEGORY_NAME::VARCHAR AS PRODUCT_CATEGORY_NAME,
+        PRODUCT_CATEGORY_NAME_ENGLISH::VARCHAR AS PRODUCT_CATEGORY_NAME_ENGLISH
 
-    from source
-    qualify row_number() over (
-        partition by product_category_name
-        order by product_category_name
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY PRODUCT_CATEGORY_NAME
+        ORDER BY PRODUCT_CATEGORY_NAME
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

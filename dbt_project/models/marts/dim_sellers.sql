@@ -1,35 +1,36 @@
-WITH sellers AS (
+WITH SELLERS AS (
     SELECT * FROM {{ ref('stg_olist_sellers') }}
 ),
 
-order_items AS (
+ORDER_ITEMS AS (
     SELECT * FROM {{ ref('stg_olist_order_items') }}
 ),
 
-orders AS (
+ORDERS AS (
     SELECT * FROM {{ ref('stg_olist_orders') }}
 ),
 
-seller_performance AS (
+SELLER_PERFORMANCE AS (
     SELECT
-        oi.seller_id,
-        SUM(oi.price) AS total_sales_value,
-        COUNT(DISTINCT oi.order_id) AS total_orders_fulfilled,
-        ROUND(AVG(oi.freight_value), 2) AS average_freight_value,
-        ROUND(AVG(DATEDIFF('day', o.order_purchase_timestamp, o.order_delivered_carrier_date)), 2) AS average_fulfillment_days
-    FROM order_items oi
-    JOIN orders o ON oi.order_id = o.order_id
+        OI.SELLER_ID,
+        SUM(OI.PRICE) AS TOTAL_SALES_VALUE,
+        COUNT(DISTINCT OI.ORDER_ID) AS TOTAL_ORDERS_FULFILLED,
+        ROUND(AVG(OI.FREIGHT_VALUE), 2) AS AVERAGE_FREIGHT_VALUE,
+        ROUND(AVG(DATEDIFF('day', O.ORDER_PURCHASE_TIMESTAMP, O.ORDER_DELIVERED_CARRIER_DATE)), 2)
+            AS AVERAGE_FULFILLMENT_DAYS
+    FROM ORDER_ITEMS AS OI
+    INNER JOIN ORDERS AS O ON OI.ORDER_ID = O.ORDER_ID
     GROUP BY 1
 )
 
 SELECT
-    s.seller_id,
-    s.seller_zip_code_prefix,
-    s.seller_city,
-    s.seller_state,
-    COALESCE(sp.total_sales_value, 0.00) AS total_sales_value,
-    COALESCE(sp.total_orders_fulfilled, 0) AS total_orders_fulfilled,
-    COALESCE(sp.average_freight_value, 0.00) AS average_freight_value,
-    sp.average_fulfillment_days
-FROM sellers s
-LEFT JOIN seller_performance sp ON s.seller_id = sp.seller_id
+    S.SELLER_ID,
+    S.SELLER_ZIP_CODE_PREFIX,
+    S.SELLER_CITY,
+    S.SELLER_STATE,
+    SP.AVERAGE_FULFILLMENT_DAYS,
+    COALESCE(SP.TOTAL_SALES_VALUE, 0.00) AS TOTAL_SALES_VALUE,
+    COALESCE(SP.TOTAL_ORDERS_FULFILLED, 0) AS TOTAL_ORDERS_FULFILLED,
+    COALESCE(SP.AVERAGE_FREIGHT_VALUE, 0.00) AS AVERAGE_FREIGHT_VALUE
+FROM SELLERS AS S
+LEFT JOIN SELLER_PERFORMANCE AS SP ON S.SELLER_ID = SP.SELLER_ID

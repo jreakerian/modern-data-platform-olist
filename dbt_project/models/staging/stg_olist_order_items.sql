@@ -1,28 +1,28 @@
-with
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_order_items_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_order_items_dataset') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        order_id::varchar as order_id,
-        order_item_id::number as order_item_id,
-        product_id::varchar as product_id,
-        seller_id::varchar as seller_id,
-        shipping_limit_date::timestamp_ntz as shipping_limit_date,
-        price::number(10,2) as price,
-        freight_value::number(10,2) as freight_value
+    SELECT
+        ORDER_ID::VARCHAR AS ORDER_ID,
+        ORDER_ITEM_ID::NUMBER AS ORDER_ITEM_ID,
+        PRODUCT_ID::VARCHAR AS PRODUCT_ID,
+        SELLER_ID::VARCHAR AS SELLER_ID,
+        SHIPPING_LIMIT_DATE::TIMESTAMP_NTZ AS SHIPPING_LIMIT_DATE,
+        PRICE::NUMBER(10, 2) AS PRICE,
+        FREIGHT_VALUE::NUMBER(10, 2) AS FREIGHT_VALUE
 
-    from source
-    qualify row_number() over (
-        partition by order_id, order_item_id
-        order by shipping_limit_date desc
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ORDER_ID, ORDER_ITEM_ID
+        ORDER BY SHIPPING_LIMIT_DATE DESC
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

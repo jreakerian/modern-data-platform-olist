@@ -1,25 +1,26 @@
-with
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_customers_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_customers_dataset') }}
 
 ),
-renamed as (
 
-    select
-        customer_id::varchar as customer_id,
-        customer_unique_id::varchar as customer_unique_id,
-        customer_zip_code_prefix::varchar as customer_zip_code_prefix,
-        customer_city::varchar as customer_city,
-        customer_state::varchar as customer_state
+RENAMED AS (
 
-    from source
-    qualify row_number() over (
-        partition by customer_id
-        order by customer_id
+    SELECT
+        CUSTOMER_ID::VARCHAR AS CUSTOMER_ID,
+        CUSTOMER_UNIQUE_ID::VARCHAR AS CUSTOMER_UNIQUE_ID,
+        CUSTOMER_ZIP_CODE_PREFIX::VARCHAR AS CUSTOMER_ZIP_CODE_PREFIX,
+        CUSTOMER_CITY::VARCHAR AS CUSTOMER_CITY,
+        CUSTOMER_STATE::VARCHAR AS CUSTOMER_STATE
+
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY CUSTOMER_ID
+        ORDER BY CUSTOMER_ID
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

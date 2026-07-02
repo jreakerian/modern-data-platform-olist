@@ -10,12 +10,12 @@
         )
     }}
 
-    select
-        customer_id,
-        customer_unique_id,
-        customer_zip_code_prefix,
-        customer_city,
-        customer_state
-    from {{ ref('stg_olist_customers') }}
+    SELECT
+        CUSTOMER_ID,
+        CUSTOMER_UNIQUE_ID,
+        CUSTOMER_ZIP_CODE_PREFIX,
+        CUSTOMER_CITY,
+        CUSTOMER_STATE
+    FROM {{ ref('stg_olist_customers') }}
 
 {% endsnapshot %}

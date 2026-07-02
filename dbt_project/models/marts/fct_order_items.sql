@@ -1,21 +1,21 @@
-WITH order_items AS (
+WITH ORDER_ITEMS AS (
     SELECT * FROM {{ ref('stg_olist_order_items') }}
 ),
 
-orders AS (
+ORDERS AS (
     SELECT * FROM {{ ref('stg_olist_orders') }}
 )
 
 SELECT
-    oi.order_id,
-    oi.order_item_id,
-    o.customer_id,
-    oi.product_id,
-    oi.seller_id,
-    oi.shipping_limit_date,
-    oi.price,
-    oi.freight_value,
-    o.order_status,
-    o.order_purchase_timestamp
-FROM order_items oi
-JOIN orders o ON oi.order_id = o.order_id
+    OI.ORDER_ID,
+    OI.ORDER_ITEM_ID,
+    O.CUSTOMER_ID,
+    OI.PRODUCT_ID,
+    OI.SELLER_ID,
+    OI.SHIPPING_LIMIT_DATE,
+    OI.PRICE,
+    OI.FREIGHT_VALUE,
+    O.ORDER_STATUS,
+    O.ORDER_PURCHASE_TIMESTAMP
+FROM ORDER_ITEMS AS OI
+INNER JOIN ORDERS AS O ON OI.ORDER_ID = O.ORDER_ID

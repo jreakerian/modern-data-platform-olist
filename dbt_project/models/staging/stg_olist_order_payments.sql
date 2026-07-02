@@ -1,26 +1,26 @@
-with
+WITH
 
-source as (
+SOURCE AS (
 
-    select * from {{ source('raw_bronze', 'olist_order_payments_dataset') }}
+    SELECT * FROM {{ source('raw_bronze', 'olist_order_payments_dataset') }}
 
 ),
 
-renamed as (
+RENAMED AS (
 
-    select
-        order_id::varchar as order_id,
-        payment_sequential::number as payment_sequential,
-        payment_type::varchar as payment_type,
-        payment_installments::number as payment_installments,
-        payment_value::number(10,2) as payment_value
+    SELECT
+        ORDER_ID::VARCHAR AS ORDER_ID,
+        PAYMENT_SEQUENTIAL::NUMBER AS PAYMENT_SEQUENTIAL,
+        PAYMENT_TYPE::VARCHAR AS PAYMENT_TYPE,
+        PAYMENT_INSTALLMENTS::NUMBER AS PAYMENT_INSTALLMENTS,
+        PAYMENT_VALUE::NUMBER(10, 2) AS PAYMENT_VALUE
 
-    from source
-    qualify row_number() over (
-        partition by order_id, payment_sequential
-        order by order_id
+    FROM SOURCE
+    QUALIFY ROW_NUMBER() OVER (
+        PARTITION BY ORDER_ID, PAYMENT_SEQUENTIAL
+        ORDER BY ORDER_ID
     ) = 1
 
 )
 
-select * from renamed
+SELECT * FROM RENAMED

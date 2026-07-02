@@ -1,4 +1,5 @@
--- This test reconciles the aggregated sales metrics in dim_products back to the original grain in stg_olist_order_items.
+-- This test reconciles the aggregated sales metrics in dim_products 
+-- back to the original grain in stg_olist_order_items.
 -- It ensures that no units sold or revenues are lost or double-counted during the aggregation in the mart.
 
 WITH MART_SUMMARY AS (
@@ -15,7 +16,9 @@ STAGING_SUMMARY AS (
     FROM {{ ref('stg_olist_order_items') }}
 )
 
-SELECT *
+SELECT
+    M.*,
+    S.*
 FROM MART_SUMMARY AS M
 CROSS JOIN STAGING_SUMMARY AS S
 WHERE
